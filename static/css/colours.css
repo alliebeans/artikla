@@ -1,0 +1,44 @@
+:root {
+    --clr-honeydew: #e9fae3;
+    --clr-honeydew-strong: #b3fb99;
+    --clr-honeydew-ff: #f6fcf3;
+    --clr-royal-blue: #3664ef;
+    --clr-maya-blue: #80c6fb;
+    --clr-primary-fg: #1e1f1d;
+}
+
+.bg-honeydew {
+    background-color: var(--clr-honeydew);
+}
+
+.bg-honeydew-strong {
+    background-color: var(--clr-honeydew-strong);
+}
+
+.bg-honeydew-ff {
+    background-color: var(--clr-honeydew-ff);
+}
+
+.bg-maya-blue {
+    background-color: var(--clr-maya-blue);
+}
+
+.bg-royal-blue {
+    background-color: var(--clr-royal-blue);
+}
+
+.bg-primary-fg {
+    background-color: var(--clr-primary-fg);
+}
+
+.bg-gray {
+    background-color: gray;
+}
+
+.fg-primary {
+    color: var(--clr-primary-fg);
+}
+
+.fg-gray {
+    color: gray;
+}

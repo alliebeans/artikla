@@ -1,0 +1,47 @@
+h1.logo {
+    font-family: var(--primary-font-logo);
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+header > nav {
+    padding: .75rem 0;
+    max-height: 9vh;
+    min-height: max(9vh, 45px);
+}
+
+a.settings {
+    font-family: var(--primary-font-sans);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+a.nav-settings {
+    font-size: .8rem;
+}
+
+button.account {
+    padding: 0;
+    border-radius: 50%;
+    min-width: 32px;
+    max-width: 32px;
+    min-height: 32px;
+    max-height: 32px;
+}
+
+#topics {
+    padding: .75rem 0 .75rem 0;
+}
+
+fieldset {
+    border: none;
+}
+
+button.filter, select.filter {
+    padding: .5em 1em ;
+}
+
+button.selected, select.selected {
+    background-color: var(--clr-royal-blue);
+}

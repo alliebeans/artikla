@@ -1,0 +1,33 @@
+div.hero {
+    padding: 7rem 4rem;
+}
+
+h1.hero {
+    font-family: var(--primary-font-serif);
+    font-size: 6.5rem;
+    margin: 0;
+}
+
+p.tagline {
+    font-family: var(--primary-font-sans);
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+button.join {
+    background-color: var(--clr-royal-blue);
+    padding: 1em 2em;
+}
+
+.partners > div {
+    padding: 1.5rem;
+}
+
+p.partners {
+    margin: 2rem auto auto auto;
+    font-family: var(--primary-font-sans);
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: gray;
+}

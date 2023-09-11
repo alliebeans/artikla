@@ -1,0 +1,103 @@
+:root {
+    --primary-font-sans: 'IBM Plex Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --primary-font-serif: 'Crimson Text', 'Times New Roman', times, serif;
+    --primary-font-logo: 'Kaisei Decol', 'Times New Roman', Times, serif;
+}
+
+main {
+    grid-area: main;
+    max-width: max-content;
+    margin: 0 auto;
+}
+
+aside {
+    grid-area: aside;
+}
+
+@media (min-width: 768px) {
+    div.articles-full-grid {
+        grid-template-columns: 15em auto;
+        grid-template-areas:
+            "aside main";
+    }
+  }
+
+span.material-icons {
+    font-family: 'Material Icons';
+    font-size: 1.25rem;
+}
+
+span.settings {
+    margin-left: .5em;
+}
+
+a {
+    color: var(--clr-royal-blue);
+}
+
+a.aside-settings {
+    font-size: .9rem;
+}
+
+ul {
+    list-style: none;
+    margin: 1em 0 0 0;
+    padding: 1em 0;
+}
+
+button, select {
+    font-family: var(--primary-font-sans);
+    font-weight: 500;
+    color: white;
+    background-color: gray;
+    border: none;
+    border-radius: 6px;
+    padding: .75em;
+    cursor: pointer;
+}
+
+caption {
+    font-family: serif;
+    color: gray;
+    font-style: italic;
+}
+
+aside.articles-controls {
+    
+}
+
+aside > .controls {
+    margin: 2rem auto;
+}
+
+.controls > fieldset {
+    margin: 1rem auto;
+    border-bottom: solid 1px lightgray;
+}
+
+button#update-articles {
+    margin: auto auto 1rem auto;
+}
+
+table.article-list {
+    min-width: var(--max-width);
+    margin: 3rem 3rem;
+}
+
+table.article-list > tbody > tr > td {
+    border-bottom: solid 1px lightgray;
+}
+
+th {
+    text-align: left;
+}
+
+tbody, tr, td {
+    padding: 0;
+    margin: 0;
+}
+
+#load-more {
+    border-bottom: none;
+    text-align: center;
+}
