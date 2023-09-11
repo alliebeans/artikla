@@ -1,0 +1,19 @@
+{% for a in articles %}
+    <tr hx-target="next tr" hx-swap="beforebegin">
+        <td class="title">
+            <a class="article" href="/articles/id/{{ a.id }}#">{{ a.title }}</a>
+        </td>
+        <td class="published">
+            <p>{{ a.published }}</p>
+        </td>
+    </tr>
+{% endfor %}
+<tr></tr>
+<tr>
+    <td id="load-more" colspan="2">
+        {% if articles|length() == limit %}
+            {% set idx = limit - 1 %}
+            <div class="flex row flex-c"><span hx-get="/articles/{{ articles[idx].id }}" hx-trigger="revealed" hx-target="closest tr" hx-swap="outerHTML" hx-select="tbody > tr">Laddar fler...</span></div>
+        {% endif %}
+    </td>
+</tr>

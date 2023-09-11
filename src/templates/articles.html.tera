@@ -1,0 +1,130 @@
+{% extends "base" %}
+
+{% block nav %}
+<header class="bg-honeydew-ff">
+    <nav class="wrapper flex row flex-sb">
+        <div class="flex row flex-s">
+            <h1 class="logo">Artikla.</h1>
+            <p>{{ now() | date(format="%d") }}</p>
+        </div>
+        <div class="right-nav flex row flex-e">
+            <div class="push-right">
+                <a href="/search" class="bookmark settings nav-settings fg-primary">
+                    <div class="flex row flex-sa">
+                        <span class="material-icons">search</span>
+                        <span class="settings">Sök</span>
+                    </div>
+                </a>
+            </div>
+            <div class="push-right">
+                <button href="/account" class="account bg-primary-fg">
+                    <span class="material-icons">person</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+</header>
+{% endblock nav %}
+
+{% block body %}
+    <div id="topics" class="bg-honeydew-ff hr-bottom-gray">
+        <div class="wrapper flex row flex-c">
+            <nav aria-labelledby="filter-controls">
+                <div id="filter-controls">
+                    <fieldset class="filter-topic">
+                        <legend class="vh">Ämne</legend>
+                        <span class="push-left">Ämne:</span>
+                        <button href="/" class="filter selected" hx-target="#">Alla</button>
+                        <button href="/" class="filter push-right" hx-target="#">{{ topics[0] }}</button>
+                        <button href="/" class="filter push-right" hx-target="#">{{ topics[1] }}</button>
+                        <button href="/" class="filter push-right" hx-target="#">{{ topics[2] }}</button>
+                        <button href="/" class="filter push-right" hx-target="#">{{ topics[3] }}</button>
+                        <button href="/" class="filter push-right" hx-target="#">{{ topics[4] }}</button>
+                        <button href="/" class="filter push-right" hx-target="#">{{ topics[5] }}</button>
+                        <button href="/" class="filter push-right" hx-target="#">{{ topics[6] }}</button>
+                        <button href="/" class="filter push-right" hx-target="#">{{ topics[7] }}</button>
+                    </fieldset>
+                    {# <fieldset class="filter-feed">
+                        <legend>Nyhetsflöden</legend>
+                        <select name="feed" class="filter selected">
+                          <option value="all">Alla</option>
+                          <option value="dn">Dagens Nyheter</option>
+                          <option value="svt">SVT Nyheter</option>
+                          <option value="aftonbladet">Aftonbladet</option>
+                          <option value="svd">Svenska Dagbladet</option>
+                        </select>
+                    </fieldset> #}
+                </div>
+            </nav>
+        </div>
+    </div>
+    
+    <div class="grid articles-full-grid">
+        <aside class="articles-controls">
+            <div class="controls">
+                <fieldset>
+                    <button id="update-articles" hx-put="/articles" class="full-width" hx-target="html">
+                        <div class="flex row flex-c">
+                            <span class="material-icons">autorenew</span>
+                            <span class="settings">Synka</span>
+                        </div>
+                    </button>
+                </fieldset>
+                <fieldset>
+                    <a href="/settings" class="settings aside-settings fg-primary">
+                        <div class="flex row flex-s">
+                            <span class="material-icons">settings</span>
+                            <span class="settings">Inställningar</span>
+                        </div>
+                    </a>
+                    <a href="/history" class="settings aside-settings fg-primary">
+                        <div class="flex row flex-s">
+                            <span class="material-icons">schedule</span>
+                            <span class="settings">Historik</span>
+                        </div>
+                    </a>
+                    <a href="/help" class="settings aside-settings fg-primary">
+                        <div class="flex row flex-s">
+                            <span class="material-icons">help</span>
+                            <span class="settings">Hjälp</span>
+                        </div>
+                    </a>
+                </fieldset>
+            </div>
+        </aside>
+        <main>
+            <table class="article-list">
+                <caption class="vh">Nyhetsartiklar</caption>
+                <thead>
+                    <tr>
+                        <th class="title">Titel</th>
+                        <th>Publicerad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% block articles_list %}
+                    {% for a in articles %}
+                        <tr hx-target="next tr" hx-swap="beforebegin">
+                            <td class="title">
+                                <a class="article" href="/articles/id/{{ a.id }}#">{{ a.title }}</a>
+                            </td>
+                            <td class="published">
+                                <p>{{ a.published }}</p>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <tr></tr>
+                    <tr>
+                        <td id="load-more" colspan="2">
+                            {% if articles|length() == limit %}
+                                {% set idx = limit - 1 %}
+                                <div class="flex row flex-c"><span hx-get="/articles/{{ articles[idx].id }}" hx-trigger="revealed" hx-target="closest tr" hx-swap="outerHTML" hx-select="tbody > tr">Laddar fler...</span></div>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endblock articles_list %}
+                </tbody>
+            </table>
+        </main>
+    </div>
+{% endblock body %}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head id=>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artikla.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400&family=Kaisei+Decol:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/wrappers.css" />
+    <link rel="stylesheet" href="/public/css/colours.css" />
+    <link rel="stylesheet" href="/public/css/body.css" />
+    <link rel="stylesheet" href="/public/css/nav.css" />
+    <link rel="stylesheet" href="/public/css/hero.css" />
+
+    <script src="https://unpkg.com/htmx.org@1.9.5"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/moz-readability@0.2.1/Readability.min.js "></script>
+    {# <script src="/public/js/htmx/htmx.min.js"></script>
+    <script src="/public/js/readability/Readability.js" type="module"></script> #}
+    <script src="/public/js/fetchArticle.js" type="module"></script>
+    {% block head %}
+    
+    {% endblock head %}
+</head>
+<body hx-boost="true">
+    <div class="hr-bottom-gray">
+        {% block nav %}
+        <header class="bg-honeydew-ff">
+            <nav class="wrapper flex row flex-sb">
+                <h1 class="logo">Artikla.</h1>
+                <div class="row">
+                    <a href="/login" class="login">Logga in</a>
+                    <button href="/join" class="join push-right" hx-target="#join">Skapa konto</button>
+                </div>
+            </nav>
+        </header>
+        {% endblock nav %}
+    </div>
+        {% block body %}
+            <div class="hero bg-honeydew-ff hr-bottom-gray">
+                <div class="wrapper">
+                    <h1 class="hero">Bara nyheter.</h1>
+                    <p class="tagline">Alla nyhetsartiklar.<br />Samlade på en och samma plats.</p>
+                    <div class="pad-right">
+                        <button href="/join" class="join" hx-target="#join">Skapa konto</button>
+                        <a href="/" class="push-right">Hur fungerar det?</a>
+                    </div>
+                </div>
+            </div>
+            <div id="join"></div>
+            <div id="login"></div>
+            {% block article_list %} {% endblock article_list %}
+        {% endblock body %}
+</body>
+</html>

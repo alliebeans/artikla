@@ -1,0 +1,5 @@
+<div id="full-article" class="read-width" data-uuid="{{ articles[0].id }}"></div>
+<ul class="flex row flex-s">
+    <li><button id="external-article-link" href="{{ articles[0].link }}\">Öppna extern länk</button></li>
+    <li><button class="push-right" href="#\" onclick="history.back()">Tillbaka</button></li>
+</ul>
