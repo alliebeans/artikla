@@ -1,2 +1,3 @@
 [default]
 template_dir = "src/templates"
+databases.artikla_db = { url = "postgres://user:secret@localhost/artikladb"}

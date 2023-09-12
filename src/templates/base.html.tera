@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="/public/css/nav.css" />
     <link rel="stylesheet" href="/public/css/hero.css" />
 
-    <script src="https://unpkg.com/htmx.org@1.9.5"></script>
-    <script src=" https://cdn.jsdelivr.net/npm/moz-readability@0.2.1/Readability.min.js "></script>
+    <script src="https://unpkg.com/htmx.org@1.9.5/dist/htmx.min.js"></script>
+    <script src="https://unpkg.com/moz-readability@0.2.1/Readability.js"></script>
     {# <script src="/public/js/htmx/htmx.min.js"></script>
     <script src="/public/js/readability/Readability.js" type="module"></script> #}
     <script src="/public/js/fetchArticle.js" type="module"></script>
