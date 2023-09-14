@@ -1,10 +1,9 @@
 use std::str::FromStr;
-
 use sqlx::PgPool;
 use rocket::response::Redirect;
 use rocket_dyn_templates::{Template, context};
 use crate::models::{channels, publication::Publication};
-use regex::Regex;
+use artikla_app::get_regex_url;
 
 #[get("/")]
 pub fn index() -> Template {
@@ -23,8 +22,7 @@ pub async fn update(pool: &rocket::State<PgPool>) -> () {
     .await
     .unwrap();
 
-    let re = Regex::new(r"^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?(\w+)").unwrap();
-    let publication_string: String = re.captures(url).unwrap()[0].into();
+    let publication_string: String = get_regex_url().captures(url).unwrap()[0].into();
     let publication = Publication::from_str(&publication_string).unwrap();
 
     let articles = channels::create_new_articles(feed.items, publication);
