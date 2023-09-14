@@ -1,8 +1,6 @@
 use regex::Regex;
 
-use models::publication::Publication;
-
-mod models;
+use crate::models::publication::Publication;
 
 pub fn get_regex_url() -> Regex {
     return Regex::new(r"^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?(\w+)").unwrap();

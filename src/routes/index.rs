@@ -3,7 +3,7 @@ use sqlx::PgPool;
 use rocket::response::Redirect;
 use rocket_dyn_templates::{Template, context};
 use crate::models::{channels, publication::Publication};
-use artikla_app::get_regex_url;
+use crate::lib::regexlib;
 
 #[get("/")]
 pub fn index() -> Template {
@@ -19,7 +19,7 @@ pub fn login() -> Redirect {
 pub async fn update(pool: &rocket::State<PgPool>) -> () {
     let url = "https://www.svt.se/nyheter/granskning/rss.xml";
 
-    let publication_string: String = get_regex_url().captures(url).unwrap()[1].into();
+    let publication_string: String = regexlib::get_regex_url().captures(url).unwrap()[1].into();
     let publication: Publication = Publication::from_str(&publication_string).unwrap();
 
     let feed = channels::get_feed(url)

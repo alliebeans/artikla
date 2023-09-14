@@ -10,6 +10,7 @@ use routes::articles::articles::{articles, articles_paginator, expand_article, f
 
 mod models;
 mod routes;
+mod lib;
 
 #[launch]
 async fn rocket() -> _ {

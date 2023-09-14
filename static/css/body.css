@@ -97,6 +97,10 @@ tbody, tr, td {
     margin: 0;
 }
 
+td.published {
+    text-align: left;
+}
+
 #load-more {
     border-bottom: none;
     text-align: center;
