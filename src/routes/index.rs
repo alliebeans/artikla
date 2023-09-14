@@ -15,9 +15,9 @@ pub fn login() -> Redirect {
     return Redirect::to("/articles");
 }
 
-#[get("/update")]
-pub async fn update(pool: &rocket::State<PgPool>) -> () {
-    let url = "https://www.svt.se/nyheter/granskning/rss.xml";
+#[post("/update")]
+pub async fn update(pool: &rocket::State<PgPool>) -> Redirect {
+    let url = "https://www.svt.se/nyheter/vetenskap/rss.xml";
 
     let publication_string: String = regexlib::get_regex_url().captures(url).unwrap()[1].into();
     let publication: Publication = Publication::from_str(&publication_string).unwrap();
@@ -39,4 +39,5 @@ pub async fn update(pool: &rocket::State<PgPool>) -> () {
             .execute(pool.inner())
             .await;
     }
+    return Redirect::to("/articles");
 }

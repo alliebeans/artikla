@@ -29,9 +29,11 @@ impl Article {
     pub fn get_published_format_swedish(datetime: DateTime<Utc>) -> String {
         let time = datetime.format("%R").to_string();
 
-        if datetime == Utc::now() {
+        let days_since_datetime = Duration::num_days(&Duration::from(Utc::now() - datetime));
+
+        if days_since_datetime == 0 {
             return format!("Idag, {}", time.as_str());
-        } else if datetime == Utc::now() - Duration::days(1) {
+        } else if days_since_datetime == 1 {
             return format!("Igår, {}", time.as_str());
         } else {
             let day = format!("{} ", datetime.format("%-e"));
