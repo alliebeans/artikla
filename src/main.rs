@@ -5,8 +5,8 @@ use dotenvy::dotenv;
 use std::env;
 use sqlx::PgPool;
 
-use routes::index::{index, login, update};
-use routes::articles::articles::{articles, articles_paginator, expand_article, full_article_content};
+use routes::index::{index, login};
+use routes::articles::articles::{articles, articles_paginator, expand_article, full_article_content, sync_articles, init_articles};
 
 mod models;
 mod routes;
@@ -20,5 +20,5 @@ async fn rocket() -> _ {
         .await
         .expect("Failed to connect to database");
 
-    rocket::build().manage::<PgPool>(pool).attach(Template::fairing()).mount("/public", FileServer::from("static")).mount("/", routes![index, login, update, articles, articles_paginator, expand_article, full_article_content])
+    rocket::build().manage::<PgPool>(pool).attach(Template::fairing()).mount("/public", FileServer::from("static")).mount("/", routes![index, login, articles, articles_paginator, expand_article, full_article_content, sync_articles, init_articles ])
 }

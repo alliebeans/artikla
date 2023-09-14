@@ -15,11 +15,13 @@ pub async fn get_feed(url: &str) -> Result<Channel, Box<dyn Error>> {
 pub fn create_new_articles(items: Vec<Item>, publication: Publication) -> Vec<Article> {
     let mut articles: Vec<Article> = Vec::new();
     for item in items {
-        let title = item.title.unwrap();
-        let link = item.link.unwrap();
-        let published = item.pub_date.unwrap();
-        let article = Article::create(&title, &link, &published, publication);
+        let article = create_new_article(item.title.unwrap(), item.link.unwrap(), item.pub_date.unwrap(), publication);
         articles.push(article);
     }
     return articles;
+}
+
+pub fn create_new_article(title: String, link: String, published: String, publication: Publication) -> Article {
+    let article = Article::create(&title, &link, &published, publication);
+    return article;
 }

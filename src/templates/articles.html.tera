@@ -70,7 +70,11 @@
         <aside class="articles-controls">
             <div class="controls">
                 <fieldset>
-                    <button id="update-articles" hx-post="/update" hx-refresh="true" class="full-width">
+                    {% if articles|length > 0 %}
+                        <button id="update-articles" hx-post="/sync" hx-target="#articles-list-tbody" hx-swap="outerHTML" class="full-width">
+                    {% else%}
+                        <button id="update-articles" hx-post="/init" hx-target="#articles-list-tbody" hx-swap="outerHTML" class="full-width">
+                    {% endif %}
                         <div class="flex row flex-c">
                             <span class="material-icons">autorenew</span>
                             <span class="settings">Synka</span>
@@ -100,25 +104,21 @@
             </div>
         </aside>
         <main>
-            {% if articles|length > 0 %}
-                <table class="article-list">
-                    <caption class="vh">Nyhetsartiklar</caption>
-                    <thead>
-                        <tr>
-                            <th class="title">Titel</th>
-                            <th>Publicerad</th>
-                            <th>Källa</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% block articles_list %}
-                            {% include "articles_list" %}
-                        {% endblock articles_list %}
-                    </tbody>
-                </table>
-            {% else %}
-                <p>Finns inga artiklar att hämta. Prova igen senare...</p>
-            {% endif %}
+            <table class="article-list">
+                <caption class="vh">Nyhetsartiklar</caption>
+                <thead>
+                    <tr>
+                        <th class="title">Titel</th>
+                        <th>Publicerad</th>
+                        <th>Källa</th>
+                    </tr>
+                </thead>
+                
+                {% block articles_list %}
+                    {% include "articles_list" %}
+                {% endblock articles_list %}
+                
+            </table>
         </main>
     </div>
 {% endblock body %}
