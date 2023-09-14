@@ -24,7 +24,11 @@ aside {
 
 span.material-icons {
     font-family: 'Material Icons';
-    font-size: 1.25rem;
+    font-size: 1.5em;
+}
+
+span.expand {
+    font-size: 1em;
 }
 
 span.settings {
@@ -96,6 +100,11 @@ tbody, tr, td {
     padding: 0;
     margin: 0;
 }
+
+/* tr:has(+ div#full-article) {
+    border-bottom: none;
+} */
+  
 
 td.published {
     text-align: left;

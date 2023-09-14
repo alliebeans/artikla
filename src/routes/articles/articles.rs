@@ -1,6 +1,7 @@
 use sqlx::PgPool;
 use rocket_dyn_templates::{Template, context};
 use crate::models::{topic::Topic, article::Article, url::get_body};
+use crate::lib::date_fmt_swedish;
 
 #[get("/articles")]
 pub async fn articles(pool: &rocket::State<PgPool>) -> Template {
@@ -11,8 +12,10 @@ pub async fn articles(pool: &rocket::State<PgPool>) -> Template {
         .fetch_all(pool.inner())
         .await
         .unwrap();
+    let today = date_fmt_swedish::get_today_swedish(chrono::offset::Local::now());
+    let weather: String = "11°".to_string();
 
-    Template::render("articles", context! { topics: topics, articles: articles, limit: limit })
+    Template::render("articles", context! { topics: topics, articles: articles, limit: limit, today: today, weather: weather })
 }
 
 #[get("/articles/id/<uuid_str>")]

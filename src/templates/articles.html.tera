@@ -4,8 +4,15 @@
 <header class="bg-honeydew-ff">
     <nav class="wrapper flex row flex-sb">
         <div class="flex row flex-s">
-            <h1 class="logo">Artikla.</h1>
-            <p>{{ now() | date(format="%d") }}</p>
+            <div class="flex row flex-sa">
+                <h1 class="logo">Artikla.</h1>
+                <div class="todays-date push-right">
+                    <p class="today"> {{ today|upper}}</p>
+                    <div class="weather flex flex-s">
+                        <span class="material-icons weather-icon" data-icon-sunny>sunny</span> {{ weather }} <a href="#" class="push-1-right">Byt stad <span class="material-icons expand">expand_more</span></a>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="right-nav flex row flex-e">
             <div class="push-right">

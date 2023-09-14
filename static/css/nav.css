@@ -45,3 +45,36 @@ button.filter, select.filter {
 button.selected, select.selected {
     background-color: var(--clr-royal-blue);
 }
+
+div.todays-date {
+    border-left: 1px solid lightgray;
+    /* border-radius: 11px; */
+    padding:.5rem 2em .5rem .8em;
+}
+
+div.todays-date > p {
+    margin: 0;
+}
+
+div.todays-date > p.today {
+    font-family: var(--primary-font-serif);
+    font-weight: bold;
+}
+
+.weather {
+    font-family: var(--primary-font-sans);
+    font-size: 1.2rem;
+}
+
+.weather > a {
+    font-size: 1rem;
+}
+
+.weather-icon {
+    margin-right: .4rem;
+    font-size: 2.2rem;
+}
+    [data-icon-sunny] {
+        color: yellow;
+    }
+    
