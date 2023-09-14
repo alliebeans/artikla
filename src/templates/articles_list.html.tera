@@ -6,6 +6,9 @@
         <td class="published">
             <p>{{ a.published }}</p>
         </td>
+        <td class="publication">
+            <p>{{ a.publication }}</p>
+        </td>
     </tr>
 {% endfor %}
 <tr></tr>

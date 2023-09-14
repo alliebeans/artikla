@@ -41,7 +41,17 @@ impl From<Publication> for String {
             Publication::Svt => String::from("SVT Nyheter"),
             Publication::Aftonbladet => String::from("Aftonbladet"),
             Publication::Svd => String::from("Svenska Dagbladet"),
-        }    
+        }
+    }
+}
+impl From<Publication> for &'static str {
+    fn from(topic: Publication) -> &'static str {
+        match topic {
+            Publication::Dn => "Dagens Nyheter",
+            Publication::Svt => "SVT Nyheter",
+            Publication::Aftonbladet => "Aftonbladet",
+            Publication::Svd => "Svenska Dagbladet",
+        }
     }
 }
 impl Display for Publication {
