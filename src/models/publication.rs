@@ -26,12 +26,7 @@ impl Serialize for Publication {
     where
         S: Serializer,
     {
-        match *self {
-            Publication::Dn => serializer.serialize_newtype_variant("Publication", 0, "Dn", "Dagens Nyheter"),
-            Publication::Svt => serializer.serialize_newtype_variant("Publication", 1, "Svt", "SVT Nyheter"),
-            Publication::Aftonbladet => serializer.serialize_newtype_variant("Publication", 2, "Aftonbladet", "Aftonbladet"),
-            Publication::Svd => serializer.serialize_newtype_variant("Publication", 3, "Svd", "Svenska Dagbladet"),
-        }
+        serializer.serialize_str(self.to_string().as_str())
     }
 }
 impl FromStr for Publication {
@@ -57,7 +52,7 @@ impl From<Publication> for String {
         }
     }
 }
-impl From<Publication> for &'static str {
+impl From<Publication> for &str {
     fn from(topic: Publication) -> &'static str {
         match topic {
             Publication::Dn => "Dagens Nyheter",
