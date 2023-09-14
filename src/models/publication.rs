@@ -1,8 +1,8 @@
 use std::str::FromStr;
 use std::fmt::Display;
-use serde::Serialize;
+use serde::{Serialize, Serializer};
 
-#[derive(Debug, Serialize, Clone, Copy, PartialEq, sqlx::Type)]
+#[derive(Debug, Clone, Copy, PartialEq, sqlx::Type)]
 #[sqlx(rename_all = "lowercase")] 
 pub enum Publication {
     Dn,
@@ -19,6 +19,19 @@ impl Publication {
         String::from(Publication::Svd),
         ];
         return publications;
+    }
+}
+impl Serialize for Publication {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        match *self {
+            Publication::Dn => serializer.serialize_newtype_variant("Publication", 0, "Dn", "Dagens Nyheter"),
+            Publication::Svt => serializer.serialize_newtype_variant("Publication", 1, "Svt", "SVT Nyheter"),
+            Publication::Aftonbladet => serializer.serialize_newtype_variant("Publication", 2, "Aftonbladet", "Aftonbladet"),
+            Publication::Svd => serializer.serialize_newtype_variant("Publication", 3, "Svd", "Svenska Dagbladet"),
+        }
     }
 }
 impl FromStr for Publication {
