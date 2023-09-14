@@ -1,7 +1,10 @@
+use std::str::FromStr;
+
 use sqlx::PgPool;
 use rocket::response::Redirect;
 use rocket_dyn_templates::{Template, context};
-use crate::models::channels::{get_feed, create_new_articles};
+use crate::models::{channels, publication::Publication};
+use regex::Regex;
 
 #[get("/")]
 pub fn index() -> Template {
@@ -15,11 +18,16 @@ pub fn login() -> Redirect {
 
 #[get("/update")]
 pub async fn update(pool: &rocket::State<PgPool>) -> () {
-    let feed = get_feed("https://www.svd.se/feed/articles/category/sverige.rss")
+    let url = "https://www.svt.se/nyheter/granskning/rss.xml";
+    let feed = channels::get_feed(url)
     .await
     .unwrap();
 
-    let articles = create_new_articles(feed.items);
+    let re = Regex::new(r"^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?(\w+)").unwrap();
+    let publication_string: String = re.captures(url).unwrap()[0].into();
+    let publication = Publication::from_str(&publication_string).unwrap();
+
+    let articles = channels::create_new_articles(feed.items, publication);
     
     for a in articles {
         let _record = sqlx::query("insert into articles (id, title, link, published, topic) values ($1, $2, $3, $4, $5)")

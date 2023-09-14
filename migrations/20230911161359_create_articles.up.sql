@@ -1,4 +1,5 @@
 create type topic as enum ('inrikes', 'utrikes', 'lokalt', 'ekonomi', 'kultur', 'vetenskap', 'sport', 'opinion');
+create type publication as enum ('dn', 'svt', 'aftonbladet', 'svd');
 
 create table articles (
   id uuid,
@@ -6,6 +7,7 @@ create table articles (
   link varchar not null,
   published timestamptz not null,
   topic topic not null,
+  publication publication not null,
   primary key (id)
 );
 

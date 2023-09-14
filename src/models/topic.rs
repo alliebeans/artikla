@@ -15,7 +15,7 @@ pub enum Topic {
     Opinion,
 }
 impl Topic {
-    pub fn get_all_as_str() -> Vec<String> {
+    pub fn get_all_as_string() -> Vec<String> {
         let topics = vec![
         String::from(Topic::Inrikes),
         String::from(Topic::Utrikes),
@@ -46,11 +46,6 @@ impl FromStr for Topic {
         }
     }
 }
-impl Display for Topic {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", get_str(self))
-    }
-}
 impl From<Topic> for String {
     fn from(topic: Topic) -> String {
         match topic {
@@ -65,15 +60,8 @@ impl From<Topic> for String {
         }    
     }
 }
-fn get_str(topic: &Topic) -> String {
-    match topic {
-        Topic::Inrikes => String::from("Inrikes"),
-        Topic::Utrikes => String::from("Utrikes"),
-        Topic::Lokalt => String::from("Lokalt"),
-        Topic::Ekonomi => String::from("Ekonomi"),
-        Topic::Kultur => String::from("Kultur"),
-        Topic::Vetenskap => String::from("Vetenskap"),
-        Topic::Sport => String::from("Sport"),
-        Topic::Opinion => String::from("Opinion"),
+impl Display for Topic {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", String::from(*self))
     }
 }
