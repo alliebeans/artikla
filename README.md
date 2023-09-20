@@ -2,6 +2,7 @@
 
 ### Artikla.
 ---
+*Beginner educational purposes -- first make it work, optimize later...*
 
 Web app for personal use built with [rocket.rs](https://rocket.rs/) web framework, [tera](https://keats.github.io/tera/docs/) templating and [htmx](https://htmx.org/).
 
@@ -13,4 +14,3 @@ TODO:
 - Implement RSS channels to my liking.
 - When creating Article, categorize into Topics.
 
-For educational purposes and personal use only.
