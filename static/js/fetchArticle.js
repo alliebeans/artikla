@@ -11,30 +11,37 @@ function loadFetcher() {
     fetchArticle(body);
 }
 
-function fetchArticle(body) {
+async function fetchArticle(body) {
     let node = document.getElementById(`full-article`);
+
+    
 
     fetch(body)
     .then((response) => response.text())
     .then((text) => new DOMParser().parseFromString(text, "text/html"))
     .then((dom) => {
-        let parsedArticle = new Readability(dom).parse();
+        // create HTMLElements
         let articleContainer = document.createElement(`article`);
-        articleContainer.setAttribute(`id`, `full-article-content`);
         let title = document.createElement(`h1`);
-        title.innerHTML = parsedArticle.title;
-        node.appendChild(articleContainer);
+        let article = document.createElement(`article`);
+
+        // get all article content
+        let parsedArticle = new Readability(dom).parse();
         let articleContent = parsedArticle.content;
+        // filter contents
         let articleTag = articleContent.split(`</article>`)[0];
         const articleParagraphs = [...articleTag.matchAll(`<\s*p[^>]*>([^<]*)<\s*\/\s*p\s*>`)];
-        articleContainer.appendChild(title);
-        let article = document.createElement(`article`);
+        // set final contents
+        title.innerHTML = parsedArticle.title;
         for(let i = 0; i < articleParagraphs.length; i++) {
             article.innerHTML += articleParagraphs[i][0];
         }
-        
-        articleContainer.appendChild(article);
 
+        // append elements to DOM
+        articleContainer.setAttribute(`id`, `full-article-content`);
+        node.appendChild(articleContainer);
+        articleContainer.appendChild(title);
+        articleContainer.appendChild(article);
     })
     .catch(`Could not load document.`);
 }
